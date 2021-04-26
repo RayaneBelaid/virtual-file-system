@@ -20,7 +20,7 @@ class FileSystem():
         #récuperer le chemin du répertoire 
         fspath = os.getcwd() + '/' + "vsf"
         #Vérifier s'il exite
-        if False == os.path.exists(fspath): 
+        if False == os.path.exists+(fspath): 
             print("Info: système de fichier n'existe pas, reconstruction")
             #ouverture du fichier(image disque) en mode écriture sur lequel on va stocké les informations de notre système de fichier
             self.fs = open("vsf", "w+")
@@ -29,7 +29,7 @@ class FileSystem():
             #lors de la modification sur le système de fichier
             
             #Initialisation des données 
-            initData = (chr(0x80) + chr(0x00) * self.INODE_MAP[-1] + #iNode bitmap 
+            initData = (chr(0x80) + chr (0x00) * self.INODE_MAP[-1] + #iNode bitmap 
                 chr(0x80) + chr(0x00) * (self.BLOCK_SIZE - len(self.INODE_MAP) - 1) +  #data bitmap
                 'D' + chr(0x00) + chr(len(self.INODE_BLOCK) + 1) + chr(0x00) * (self.BLOCK_SIZE - 3) + #iNode pour "/"
                 chr(0x00) * self.BLOCK_SIZE * (len(self.INODE_BLOCK) - 1) + #autres inodes
@@ -297,7 +297,7 @@ class FileSystem():
         if inode[0] != 'F': #s'il est différent de F donc il s'agit pas d'un fichier
             print("Erreur: Impossible de lire le répertoire")
             return []
-        else:
+        else:     
             #calculer la taille du fichier
             length = (ord(inode[1]) << 8) + ord(inode[2])
             #afficher la taille du fichier 
@@ -477,7 +477,7 @@ class FileSystem():
 
 
 #########################################################################################################
-# Fonction: cmd                                                                                         #
+# Fonction: cmd (main)                                                                                  #
 # Objectif : Cette fonction permet de simulier les commandes de terminal et de tester                   #
 #            tous les opérations du système de fichier implémentés.                                     #                                                                                            
 #########################################################################################################
@@ -491,17 +491,18 @@ def cmd():
     #initiliser la liste des commandes à utilisés
     helpInfo = "read, close, ls, check, quit, open, cd, mkdir, write, rm, rmdir, cp"
     while True:
-        c = input(fs.curDir + " >> ")
-        params = c.strip().split()
+        #recuperer le rep actuelle  
+        c = input(fs.curDir + " >> ") 
+        params = c.strip().split() #split = split a string into a list / strip = remove any space from the beginning and from the end
         
         # si la requette à un seul paramètre
         if len(params) == 1:
             if params[0] == 'help':
-                print(helpInfo)
+                print(helpInfo) #afficher la liste des commendes
                 continue
 
             if params[0] == 'read':
-                print("".join(fs.read(inodeNum)))
+                print("".join(fs.read(inodeNum))) #join() = join all items in a tuples into one string
                 continue
             
             if params[0] == 'close':
