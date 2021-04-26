@@ -1,9 +1,3 @@
-# FileSystem-Emulator
-
-A file system emulator based on inode structure: https://en.wikipedia.org/wiki/Inode
-
-Enviorment
-- python2.6 or above
 
 Pour exécuter le programme il suffit avoir un environnement python3 et de simplement lancer la commande : python filesystm.py  
 
