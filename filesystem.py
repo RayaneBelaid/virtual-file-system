@@ -19,11 +19,12 @@ class FileSystem():
     def __init__(self):
         #récuperer le chemin du répertoire 
         fspath = os.getcwd() + '/' + "vsf"
+        print(fspath)
         #Vérifier s'il exite
-        if False == os.path.exists+(fspath): 
+        if False == os.path.exists(fspath): 
             print("Info: système de fichier n'existe pas, reconstruction")
             #ouverture du fichier(image disque) en mode écriture sur lequel on va stocké les informations de notre système de fichier
-            self.fs = open("vsf", "w+")
+            self.fs = open("vsf", "w+")ls
                          
             #La technique bitmap permet de trouver rapidement un emplacement libre sur la table des inodes(ou sur les blocks de donees) 
             #lors de la modification sur le système de fichier
@@ -46,7 +47,7 @@ class FileSystem():
 
         self.data = []
         self.__load()
-        self.dataStart = self.BLOCK_SIZE * (len(self.INODE_BLOCK) + 1)
+        self.dataStart = self.BLOCK_SIZE * (len(self.INODE_BLOCK) + 1) #512*82 la taille des blocs
         self.curDir = "/"
         self.curInode = self.__getInode(0)
         
@@ -79,7 +80,7 @@ class FileSystem():
     def __find(self, path):
         pass
 
-
+    # verifier l'image bitmap
     def checkMap(self):
         line = ""
         for x in range(0, self.BLOCK_SIZE):
@@ -96,9 +97,11 @@ class FileSystem():
     #créer un nouveau inode
     def __newInode(self, itype):
         for x in range(0, len(self.INODE_MAP)):
+            #recuperer un bit de bitmap
             byte = self.data[x]
-            for y in range(0, 8):
-                if ((ord(byte) >> (7 - y)) & 0x01) == 0:
+            for y in range(0, 8):  #range() = returns a sequence of numbers, starting by 0 by default and increment by 1 by default, and stops before specified number
+                #verifier s'il est = 0 pour creer un nouv inode
+                if ((ord(byte) >> (7 - y)) & 0x01) == 0:  #ord() returns an intiger representing the unicode character
                     print("Info: nouveau inode " + str(x * 8 + y))
                     self.data[x] = chr(ord(byte) | (0x80 >> y))
                     self.__initInode(x * 8 + y, itype)
@@ -478,12 +481,12 @@ class FileSystem():
 
 #########################################################################################################
 # Fonction: cmd (main)                                                                                  #
-# Objectif : Cette fonction permet de simulier les commandes de terminal et de tester                   #
+# Objectif : Cette fonction joue le role de simulateur de la boite de commandes pour tester             #
 #            tous les opérations du système de fichier implémentés.                                     #                                                                                            
 #########################################################################################################
 
 def cmd():
-    #récupérer le système de fichier
+    #appel le système de fichier
     fs = FileSystem()
     #récupérer l'inode
     inode = fs.curInode
@@ -493,7 +496,8 @@ def cmd():
     while True:
         #recuperer le rep actuelle  
         c = input(fs.curDir + " >> ") 
-        params = c.strip().split() #split = split a string into a list / strip = remove any space from the beginning and from the end
+        params = c.strip().split() #split = split a string into a list 
+        #strip = remove any space from the beginning and from the end
         
         # si la requette à un seul paramètre
         if len(params) == 1:
@@ -521,7 +525,7 @@ def cmd():
 
             if params[0] == 'quit':
                 break
-        #si la requette à deux paramètres
+        #si la requette a deux paramètres
         if len(params) == 2:
             if params[0] == 'open':
                 inodeNum, inode = fs.open(params[1])
@@ -546,13 +550,13 @@ def cmd():
             if params[0] == 'rmdir':
                 fs.rmdir(params[1])
                 continue
-        #si la requette à trois paramètres  
+        #si la requette a trois paramètres  
         if len(params) == 3:
             if params[0] == 'cp':
                 fs.cp(params[1], params[2])
                 continue
 
-        #si la commande introuvable
+        #si la commande est introuvable
         print("Erreur: commande inconnu")
         print(helpInfo)
 
