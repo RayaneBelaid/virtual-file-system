@@ -2,16 +2,15 @@ import sys
 import os
 
 
-#########################################################################################################
-# Class: FileSystem                                                                                     #
-# Objectif : implémenter les fonctions pour les opérations nécessaires pour la gestion des fichiers.    #                                                                                            
-#########################################################################################################
+############################################################################################################
+# Class: FileSystem                                                                                        #
+# Objectif : implémenter les fonctions pour les opérations nécessaires de systeme de gestion des fichiers. #                                                                                            
+############################################################################################################
 class FileSystem():
     BLOCK_SIZE  = 512   #la taille du block
     BLOCK_NUM   = 1000  #nombre de blocks
     
-    #inode map: a table indicating where each inode is on the disk
-    #inode map blocks are written as part of the segment; a table in a fixed checkpoint region on disk points to those blocks
+      
     #inode map: une table qui indique l'emplacement de chaque inode dans le disque
     INODE_MAP   = [x for x in range(0, 80 // 8)] #[0-9]
     INODE_BLOCK = [x for x in range(1, 81)]  #[1-81]
@@ -24,7 +23,7 @@ class FileSystem():
         if False == os.path.exists(fspath): 
             print("Info: système de fichier n'existe pas, reconstruction")
             #ouverture du fichier(image disque) en mode écriture sur lequel on va stocké les informations de notre système de fichier
-            self.fs = open("vsf", "w+")ls
+            self.fs = open("vsf", "w+")
                          
             #La technique bitmap permet de trouver rapidement un emplacement libre sur la table des inodes(ou sur les blocks de donees) 
             #lors de la modification sur le système de fichier
@@ -99,9 +98,9 @@ class FileSystem():
         for x in range(0, len(self.INODE_MAP)):
             #recuperer un bit de bitmap
             byte = self.data[x]
-            for y in range(0, 8):  #range() = returns a sequence of numbers, starting by 0 by default and increment by 1 by default, and stops before specified number
+            for y in range(0, 8):  #range() = retourne une sequence de nombre, par defaut elle commence par un 0 increment par 1, et elle s'arrete avant un chiffre specifie 
                 #verifier s'il est = 0 pour creer un nouv inode
-                if ((ord(byte) >> (7 - y)) & 0x01) == 0:  #ord() returns an intiger representing the unicode character
+                if ((ord(byte) >> (7 - y)) & 0x01) == 0:  #ord() retourne un entier qui represente unicode character
                     print("Info: nouveau inode " + str(x * 8 + y))
                     self.data[x] = chr(ord(byte) | (0x80 >> y))
                     self.__initInode(x * 8 + y, itype)

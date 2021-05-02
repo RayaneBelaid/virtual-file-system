@@ -3,7 +3,7 @@ Pour exécuter le programme il suffit avoir un environnement python3 et de simpl
 
 Un fichier vfs sera créé pour stocker les informations du disque virtuel.
 
-Voici un exemple d’utilisation de notre simulateur du système du fichier:
+Voici un exemple d’utilisation de notre simulation:
 
 Soit x et y deux paramètres.
 
@@ -11,7 +11,7 @@ Soit x et y deux paramètres.
 	quit : quitter le simulateur  
 	ls : lister les répertoires et les fichiers existant dans le système 
 	check : vérifier le bitmap
-	cd x : changer vers le répertoire  x 
+	cd x : deplacer vers le répertoire  x 
 	open x : ouvrir le fichier x, s’il n’existe pas il sera crée 
 	close : fermer le fichier ouvert 
 	mkdir x: créer un répertoire nommé x
