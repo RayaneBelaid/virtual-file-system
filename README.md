@@ -1,11 +1,11 @@
 
-Pour exécuter le programme il suffit avoir un environnement python3 et de simplement lancer la commande : python filesystm.py  
+Pour exécuter le programme il suffit avoir un environnement `python3` et de simplement lancer la commande : `python filesystm.py ` 
 
-Un fichier vfs sera créé pour stocker les informations du disque virtuel.
+Un fichier `vfs` sera créé pour stocker les informations du disque virtuel.
 
 Voici un support d’utilisation de notre simulation:
 
-Soit x et y deux paramètres.
+Soit `x` et `y` deux paramètres.
 
 *	`help` : lister toutes les commandes existant sur notre système de fichier 
 *	`quit` : quitter le simulateur  
