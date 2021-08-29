@@ -3,7 +3,7 @@ Pour exécuter le programme il suffit avoir un environnement python3 et de simpl
 
 Un fichier vfs sera créé pour stocker les informations du disque virtuel.
 
-Voici un exemple d’utilisation de notre simulation:
+Voici un support d’utilisation de notre simulation:
 
 Soit x et y deux paramètres.
 
