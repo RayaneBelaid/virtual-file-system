@@ -7,7 +7,7 @@ Voici un support d’utilisation de notre simulation:
 
 Soit x et y deux paramètres.
 
-*	help : lister toutes les commandes existant sur notre système de fichier 
+*	`help` : lister toutes les commandes existant sur notre système de fichier 
 *	quit : quitter le simulateur  
 * ls : lister les répertoires et les fichiers existant dans le système 
 *	check : vérifier le bitmap
