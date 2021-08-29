@@ -7,8 +7,8 @@ Voici un exemple d’utilisation de notre simulation:
 
 Soit x et y deux paramètres.
 
-1.	help : lister toutes les commandes existant sur notre système de fichier 
-2.	quit : quitter le simulateur  
+*	help : lister toutes les commandes existant sur notre système de fichier 
+*	quit : quitter le simulateur  
 > ls : lister les répertoires et les fichiers existant dans le système 
 >	check : vérifier le bitmap
 >	cd x : deplacer vers le répertoire  x 
